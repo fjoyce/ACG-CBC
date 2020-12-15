@@ -1,0 +1,133 @@
+---
+title: "CBC cleaning"
+author: "Francis Joyce"
+date: "7/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(dplyr)
+library(janitor)
+library(readr)
+library(naniar)
+library(lubridate)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+
+```{r}
+CRSR_cbc <- read_csv(here("CRSR-2010-2018_cleaned.csv"))
+```
+
+
+```{r}
+CRSR_cbc %>%
+  head() %>%
+  kable() %>%
+  kable_styling(full_width = FALSE, position = "left")
+
+```
+
+
+```{r}
+CRSR_cbc %>% 
+  filter(row_number() == 1) %>% 
+  pull(species)
+```
+
+```{r}
+# Putting it together: Mutating the two variables
+CRSR_cbc <- CRSR_cbc %>%
+  mutate(species_latin = str_extract(species, "(?<=\\[).+?(?=\\])"),
+         species = word(species, start = 1, sep = fixed('\n[')))
+```
+
+
+```{r}
+CRSR_cbc %>% 
+  filter(row_number() == 15133) %>% 
+  pull(count_year)
+```
+
+```{r}
+count_participant_meta_data <- CRSR_cbc %>%
+  distinct(participant_info = count_year) %>%
+  mutate(year = word(participant_info)) %>%
+  mutate(number_of_participants = str_extract(
+    participant_info, "(?<=Participants:\\s).+?(?=\\s#)")) %>%  # Gets everything between "Participants: " and " #"
+  mutate(species_reported = str_extract(
+    participant_info, "(?<=Reported:\\s).+?(?=\\nTotal)")) %>%  # Gets everything between "Reported: " and "Total"
+  mutate(total_hours = str_extract(
+    participant_info, "(?<=Hrs\\.:\\s).*$"))  # Gets everything after "Hrs.: "
+# This regex is different because it goes until the end of the string:
+# https://forum.sublimetext.com/t/regex-match-everything-after-this-word/20764
+
+count_participant_meta_data %>%
+  head(n = 3) %>%
+  kable() %>%
+  kable_styling(full_width = FALSE, position = "left")
+```
+
+
+```{r}
+CRSR_cbc <- CRSR_cbc %>%
+  rename(participant_info = count_year,
+         how_many_counted = how_many_cw) %>%
+  mutate(year = as.integer(word(participant_info)),  # We will keep year and total_hours
+         total_hours = as.double(
+           str_extract(
+             participant_info, "(?<=Hrs\\.:\\s).*$")))
+```
+
+```{r}
+CRSR_cbc <- CRSR_cbc %>%
+  select(year, species, species_latin, how_many_counted, total_hours)
+```
+
+
+```{r}
+#remove cw records
+CRSR_cbc <- CRSR_cbc %>%
+  mutate(how_many_counted = ifelse(how_many_counted == "cw", NA, how_many_counted),
+         how_many_counted = as.integer(how_many_counted))
+```
+
+```{r}
+#filter out generic IDs?
+CRSR_cbc %>%
+filter(str_detect(species, "sp\\.")) %>%
+distinct(species)
+```
+
+
+```{r}
+CRSR_cbc <- CRSR_cbc %>%
+  filter(!(str_detect(species, "sp\\.")))
+```
+
+```{r}
+CRSR_cbc <- CRSR_cbc %>%
+  mutate(how_many_counted = replace_na(how_many_counted, 0),
+         how_many_counted_by_hour = as.double(how_many_counted) / total_hours)
+```
+
+```{r}
+CRSR_cbc %>%
+  head() %>%
+  kable() %>%
+  kable_styling(full_width = FALSE, position = "left")
+```
+```{r}
+write_csv(CRSR_cbc, "CRSR-CBC-cleaned.csv")
+```
+

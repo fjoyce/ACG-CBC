@@ -1,0 +1,13 @@
+name: ACG-CBC-Santa-Rosa
+title: ACG-CBC-Santa-Rosa
+username:
+account: fhjoyce
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2561087
+bundleId: 3393063
+url: https://fhjoyce.shinyapps.io/ACG-CBC-Santa-Rosa/
+when: 1594768795.92147
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: ACG-CBC-cleaning.Rmd|CRSR-2010-2018.csv|CRSR-2010-2018_cleaned.csv|CRSR-2019.csv|CRSR-CBC-2010-2019.csv
