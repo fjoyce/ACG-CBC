@@ -1,6 +1,6 @@
 # ACG-Santa Rosa CBC Shiny app
 
-Shiny app for Santa Rosa Christmas Bird Count in Area Conservación Guanacaste: https://fhjoyce.shinyapps.io/ACG-CBC-Santa-Rosa/
+[Shiny app](https://fhjoyce.shinyapps.io/ACG-CBC-Santa-Rosa/) for Santa Rosa Christmas Bird Count in Area Conservación Guanacaste: 
 
 Adapted from [Sharleen W's Shiny app for Hamilton, Ontario](https://sharleenw.shinyapps.io/hamilton_cbc_shiny/), as described on [this blog]( https://sharleenw.rbind.io/2019/03/24/hamilton-cbc-part-3/)
 
