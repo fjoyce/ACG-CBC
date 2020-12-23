@@ -24,6 +24,27 @@ library(kableExtra)
 library(here)
 ```
 
+Download data from here: https://netapp.audubon.org/cbcobservation/historical/resultsbycount.aspx#
+
+Use count code CRSR
+
+Start year = 111 (2010)
+End year = 120 (2019)
+
+CSV, sort Taxonomic
+
+Then, cut out non-species count top rows.
+
+Rename so that the columns are:
+
+species
+count_year
+how_many_cw	
+number_by_party_hours
+flags
+
+
+
 
 ```{r}
 CRSR_cbc <- read_csv(here("CRSR-2010-2018_cleaned.csv"))
