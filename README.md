@@ -10,7 +10,7 @@ Adapted from Sharleen W's Shiny app for Hamilton, Ontario: https://sharleenw.rbi
 
 Start year: 111 (2010)
 and
-End year: 119 (2019)
+End year: 120 (2019)
 
 Even though the filename says 2011-2020
 
