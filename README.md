@@ -6,7 +6,7 @@ Adapted from Sharleen W's Shiny app for Hamilton, Ontario: https://sharleenw.rbi
 
 # data
 
-CRSR-2010-2018.csv is the raw csv download from https://netapp.audubon.org/cbcobservation/historical/resultsbycount.aspx#
+CRSR-2010-2018.csv is the raw csv download from https://netapp.audubon.org/cbcobservation/historical/resultsbycount.aspx# (count code CRSR)
 
 ACG-CBC-cleaning.Rmd takes CRSR-2010-2018_cleaned.csv and outputs CRSR-CBC-cleaned.csv
 
