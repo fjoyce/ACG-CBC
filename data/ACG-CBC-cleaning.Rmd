@@ -1,7 +1,7 @@
 ---
 title: "CBC cleaning"
 author: "Francis Joyce"
-date: "7/5/2020"
+date: "2020-12-22"
 output: html_document
 ---
 
@@ -33,7 +33,9 @@ End year = 120 (2019)
 
 CSV, sort Taxonomic
 
-Then, cut out non-species count top rows.
+Then, delete non-species count top rows.
+
+ALso delete the rows below for participants...
 
 Rename so that the columns are:
 
@@ -47,7 +49,7 @@ flags
 
 
 ```{r}
-CRSR_cbc <- read_csv(here("CRSR-2010-2018_cleaned.csv"))
+CRSR_cbc <- read_csv(here("data/CRSR-2010-2019_cleaned.csv"))
 ```
 
 
@@ -148,7 +150,10 @@ CRSR_cbc %>%
   kable() %>%
   kable_styling(full_width = FALSE, position = "left")
 ```
+
+Move this file manually to the root directory
+
 ```{r}
-write_csv(CRSR_cbc, "CRSR-CBC-cleaned.csv")
+write_csv(CRSR_cbc, "CRSR-CBC-2019-cleaned.csv")
 ```
 
