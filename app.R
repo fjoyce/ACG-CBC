@@ -4,6 +4,7 @@ library(ggplot2)
 library(readr)
 library(scales)
 library(cowplot)
+library(here)
 
 #library(devtools) #only need for installing tanagR or calecopal
 
@@ -19,7 +20,7 @@ min_max <- function(vector){
 }
 
 # read in cleaned CRSR ACG CBC data
-CRSR <- read_csv("CRSR-CBC-2019-cleaned.csv")
+CRSR <- read.csv(here::here("CRSR-CBC-2021-cleaned.csv"))
 
 ## redo with CRSR species
 species_list <- CRSR %>%
@@ -174,7 +175,7 @@ server <- function(input, output) {
                 theme(strip.text = element_text(face = "bold.italic")) + #make facet labels/titles italics             
                 #scale_colour_paletteer_c("tanagr::tangara_chilensis") +
                 #scale_color_manual(values = cal_palette("sierra1")) +
-                scale_x_continuous(breaks = seq(2010, 2019, by = 2)) +
+                scale_x_continuous(limits = c(2010,2022), breaks = seq(2010, 2022, by = 2)) +
                 scale_y_continuous(labels = comma)#+
                 #scale_color_tanagr(palette_name = "tangara_chilensis")
             

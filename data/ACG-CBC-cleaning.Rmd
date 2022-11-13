@@ -49,7 +49,7 @@ flags
 
 
 ```{r}
-CRSR_cbc <- read_csv(here("data/CRSR-2010-2019_cleaned.csv"))
+CRSR_cbc <- read_csv(here("data/CRSR-2010-2021_cleaned.csv"))
 ```
 
 
@@ -154,6 +154,6 @@ CRSR_cbc %>%
 Move this file manually to the root directory
 
 ```{r}
-write_csv(CRSR_cbc, "CRSR-CBC-2019-cleaned.csv")
+write_csv(CRSR_cbc, "CRSR-CBC-2021-cleaned.csv")
 ```
 
